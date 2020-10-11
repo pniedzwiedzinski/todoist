@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"strings"
 
 	"github.com/urfave/cli"
 )
@@ -13,7 +14,10 @@ func Quick(c *cli.Context) error {
 		return CommandFailed
 	}
 
-	client.QuickCommand(context.Background(), c.Args().First())
+	client.QuickCommand(
+		context.Background(),
+		strings.Join(c.Args(), " "),
+	)
 
 	return Sync(c)
 }
